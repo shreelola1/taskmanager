@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: webapp
+  namespace: default
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: webapp.taskmanager.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: webapp
+          servicePort: 8080

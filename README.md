@@ -74,14 +74,15 @@ If you don't use the dockerized environment (Options 1 and 2) you have to take c
 * Create the database as described in *Database configuration*
 * Run the classes ``EndpointsMain`` and ``SchedulerMain``. It can be done eclipse after having imported the project or directly from the command line.
 
-### [WIP3]OPTION 3 - run via dockercompose
+### OPTION 3 - run via buildscipt and docker compose
 
-*The coolest option but it still doesn't work :(*
-
-In the repo root run ``#$ sudo docker-compose up``
+In the repo root run ``#$bash -x build.sh``
 
 Open the browser at http://localhost:8080 and have fun!
 
 ![preview](/doc/preview.jpg?raw=true)
 
+### OPTION 4 - run on kubernetes environment
+
+Please read the doc under k8s folder to install and deploy application on kubernetes cluster.
 

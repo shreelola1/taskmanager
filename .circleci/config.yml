@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  web_sched:
+    working_directory: ~/cci
+    docker:
+      - image: maven:3.5-jdk-8-alpine
+    steps:
+      - checkout
+      - save_cache: # saves the project dependencies
+          paths:
+            - ~/.m2
+          key: cci-{{ checksum "pom.xml" }}
+      - run:
+          name: Build web 
+          command: 'mvn clean install -Pweb'
+      - run:
+          name: Build scheduler 
+          command: 'mvn clean install -Pscheduler'
+      - store_artifacts: # store the uberjar as an artifact
+          path: endpoints/target/endpoints-0.1-SNAPSHOT.jar
+      - store_artifacts: # store the uberjar as an artifact
+          path: scheduler/target/scheduler-0.1-SNAPSHOT.jar   
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - web_sched:
+          filters:
+            branches:
+              only: master

@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
+import org.springframework.core.env.Environment;
 import it.fds.taskmanager.TaskService;
 import it.fds.taskmanager.dto.TaskDTO;
 import it.fds.taskmanager.tasksgenerator.TasksGenerator;
@@ -39,6 +39,7 @@ public class SchedulerNewTasks {
 	
 	@Autowired
 	private TasksGenerator basicTaskGenerator;
+        private Environment env; 
 	
 	public SchedulerNewTasks(){}
 	
@@ -52,7 +53,7 @@ public class SchedulerNewTasks {
 				RestTemplate rt = new RestTemplate();
 				ResponseEntity<String> result = null;
 				try {
-					result = rt.postForEntity(new URI("http://localhost:8080/task/notify"), newt.getUuid(), String.class);
+					result = rt.postForEntity(new URI("http://"+ env.getProperty("rest.host")+":8080/task/notify"), newt.getUuid(), String.class);
 					LOGGER.info("Result of the notify call: '" + result + "'");
 					LOGGER.info("New Task SAVED!");
 				} catch (RestClientException | URISyntaxException e) {
