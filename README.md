@@ -84,5 +84,5 @@ Open the browser at http://localhost:8080 and have fun!
 
 ### OPTION 4 - run on kubernetes environment
 
-Please read the doc under k8s folder to install and deploy application on kubernetes cluster.
+Please read the doc under k8s folder to install and deploy application on kubernetes cluster....
 
